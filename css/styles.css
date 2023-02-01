@@ -31,7 +31,7 @@ html {
     background-color: #000;
     border-radius: 5px;
     height: 150px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .buttons{
@@ -39,8 +39,8 @@ html {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 10px;
-    margin: 10px;
-    height: 320px;
+    margin: 20px;
+    height: 280px;
     /* border: solid 1px white; */
 }
 
@@ -50,7 +50,7 @@ html {
     padding-top: 25%;
     border-radius: 50px;
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.1em;
     cursor: pointer;
 }
 
