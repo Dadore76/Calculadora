@@ -57,7 +57,7 @@ html {
 .clear {
     background-color: rgb(138, 19, 19)}
 
-.symbol {
+.symbol, .brackets {
     background-color: rgb(44, 27, 105);
 }
 
@@ -67,4 +67,8 @@ html {
 
 .number {
     background-color: #bbb;
+}
+
+.dot, .del{
+    background-color: rgb(155, 155, 12);
 }
