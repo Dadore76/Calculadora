@@ -35,7 +35,11 @@ let result = () => {
 }
 
 let del = () => {
-    screen = screen.slice(0, screen.length -1);
+    if (screen.slice(-1) == " ")
+        screen = screen.slice(0, screen.length - 3);
+    else
+        screen = screen.slice(0, screen.length - 1);
+    
     updateScreen();
 }
 
