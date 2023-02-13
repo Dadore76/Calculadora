@@ -11,14 +11,16 @@ let updateScreen = () => {
 
 let button = (event) => {
     let currButton = event.target;
-    let lastChar = screen ? screen.slice(-1) : "";
+    screen = typeof (screen) === "number" ? screen.toString() : screen;
+    let lastChar = screen ? screen.charAt(screen.length - 1) : "";
     let isSymbol = symbols.includes(currButton.innerHTML)
 
     if (isNaN(Number(screen)) && symbols.includes(lastChar) && isSymbol) {
         return;
     }
-    else if (isNaN(Number(screen)) && isSymbol) {
-        screen = eval(screen);
+    else if (lastChar === " " && isSymbol) {
+        screen = screen.replace(screen.substring(screen.length - 3),"");
+        updateScreen();
     }
     
     if (isSymbol)
@@ -26,6 +28,24 @@ let button = (event) => {
     else
         screen += `${currButton.innerHTML}`;
         
+    updateScreen();
+}
+
+let brackets = () => {
+    screen = typeof (screen) === "number" ? screen.toString() : screen;
+
+    let lastChar = screen.charAt(screen.length - 1);
+    let bracket = "(";
+    
+    let countOpenBrack = screen.includes("(") ? screen.match(/\(/g).length : 0;
+    let countCloseBrack = screen.includes(")") ? screen.match(/\)/g).length : 0;
+    let pairBrackets = countOpenBrack - countCloseBrack;
+
+    if (pairBrackets >= 1 && lastChar !== "(" && (!isNaN(lastChar) || lastChar === ")")) {
+        bracket = ")";
+    }
+
+    screen += bracket;
     updateScreen();
 }
 
@@ -52,8 +72,8 @@ let clear = () => {
 for (var i = 0; i < numButtons; i++) {
     if (buttons[i].classList.contains("button"))
         buttons[i].addEventListener("click", button);
-    // else if (buttons[i].classList.contains("brackets"))
-    //     buttons[i].addEventListener("click", brackets);
+    else if (buttons[i].classList.contains("brackets"))
+        buttons[i].addEventListener("click", brackets);
     else if (buttons[i].classList.contains("result"))
         buttons[i].addEventListener("click", result);
     else if (buttons[i].classList.contains("del"))
