@@ -36,7 +36,7 @@ let brackets = () => {
 
     let lastChar = screen.charAt(screen.length - 1);
     let bracket = "(";
-    
+
     let countOpenBrack = screen.includes("(") ? screen.match(/\(/g).length : 0;
     let countCloseBrack = screen.includes(")") ? screen.match(/\)/g).length : 0;
     let pairBrackets = countOpenBrack - countCloseBrack;
@@ -68,12 +68,34 @@ let clear = () => {
     updateScreen();
 }
 
+let percent = () => {
+    let backward = screen.split('').reverse().join('');
+    let space = screen.indexOf(' ');
+    let numberPoint = 0;
+
+    if (space === -1 && !isNaN(Number(screen))) {
+        numberPoint = screen;
+    }
+    else {
+        numberPoint = screen.substring(screen.length - space);
+    }
+
+    let newNumber = (numberPoint / 100).toFixed(2);
+    console.log(numberPoint);
+    console.log(newNumber);
+
+    screen = screen.replace(numberPoint, newNumber);
+    updateScreen();
+}
+
 //Add event listener buttons
 for (var i = 0; i < numButtons; i++) {
     if (buttons[i].classList.contains("button"))
         buttons[i].addEventListener("click", button);
     else if (buttons[i].classList.contains("brackets"))
         buttons[i].addEventListener("click", brackets);
+        else if (buttons[i].classList.contains("percent"))
+        buttons[i].addEventListener("click", percent);
     else if (buttons[i].classList.contains("result"))
         buttons[i].addEventListener("click", result);
     else if (buttons[i].classList.contains("del"))
